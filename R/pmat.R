@@ -19,7 +19,7 @@ function(x, start = -6, end = 9, vnames = NULL) {
 	for (i in 1:no.vars) {
 		vnames.mat[, i] <- paste(vnames[i], ".", used.months, sep = "")
 	}
-	m <- matrix(NA, nrow = no.months*2, ncol = n - 1)
+	m <- matrix(NA, nrow = no.months*no.vars, ncol = n - 1)
 	colnames(m) <- years[-1]
 	rownames(m) <- as.vector(vnames.mat)
 	for (i in 2:n) {
