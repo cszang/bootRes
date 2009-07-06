@@ -11,7 +11,7 @@ function(x, start = -6, end = 9, vnames = NULL) {
 	if (is.null(vnames)) {
 		vnames <- paste(rep("V", no.vars), 1:no.vars, sep = "")
 	} else { # check if number of specified variable names is equal to actual number of variables
-		if (length(unique(vnames) != no.vars)) {
+		if (length(unique(vnames)) != no.vars) {
 			vnames <- paste(rep("V", no.vars), 1:no.vars, sep = "")
 		}
 	}
