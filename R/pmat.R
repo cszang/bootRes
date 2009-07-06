@@ -2,12 +2,16 @@ pmat <-
 function(x, start = -6, end = 9) {
 	years <- unique(x[, 1])
 	n <- length(years)
+	no.vars <- dim(x)[2] - 2 # number of variables
 	months <- paste(c(rep("prev.", 12), rep("curr.", 12)), rep(c("jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"), 2), sep = "")
 	month.ids <- c(-1:-12, 1:12)
 	used.months <- months[which(month.ids == start):which(month.ids == end)]
-	temp.vars <- paste("temp.", used.months, sep = "")
-	prec.vars <- paste("prec.", used.months, sep = "")
 	no.months <- length(used.months)
+	# create unique names for variables
+	vnames.mat <- matrix(NA, nrow = no.months, nol = no.vars)
+	for (i in 1:no.vars) {
+		vnames.mat[, i] <- paste(vnames[i], used.months, sep = "")
+	}
 	m <- matrix(NA, nrow = no.months*2, ncol = n - 1)
 	colnames(m) <- years[-1]
 	rownames(m) <- c(temp.vars, prec.vars)
