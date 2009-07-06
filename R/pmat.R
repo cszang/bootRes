@@ -7,13 +7,13 @@ function(x, start = -6, end = 9, vnames = NULL) {
 	month.ids <- c(-1:-12, 1:12)
 	used.months <- months[which(month.ids == start):which(month.ids == end)]
 	no.months <- length(used.months)
-	# check for specified variable names, else default to V1, V2 etc.
-	if (is.null(vnames)) {
-		vnames <- paste(rep("V", no.vars), 1:no.vars, sep = "")
-	} else { # check if number of specified variable names is equal to actual number of variables
-		if (length(unique(vnames)) != no.vars) {
+	# check for specified variable names, else default to colnames of x, if not present to V1, V2 etc.
+	if (is.null(vnames) || length(unique(vnames)) != no.vars) {
+		if (!is.null(colnames(x))) {
+			vnames <- colnames(x)[3:(no.vars+2)]		
+		} else {
 			vnames <- paste(rep("V", no.vars), 1:no.vars, sep = "")
-		}
+		}	
 	}
 	vnames.mat <- matrix(NA, nrow = no.months, ncol = no.vars) # create unique names for variables
 	for (i in 1:no.vars) {
