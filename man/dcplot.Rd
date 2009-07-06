@@ -28,6 +28,9 @@ character vector with labels to use for coefficients. Defaults to \code{rownames
 integer indicating the style to be used for labels. Options are 1 for verbose/verbatim labels or 2 for abbreviated month names. If custom labels are specified, selection reverts to 1.
 }
 }
+\details{
+If less than 4 parameters are used in the response or correlation function, each parameter is represented with a distinct symbol.
+}
 \value{
 None. Invoked for side effect (plot).
 }
