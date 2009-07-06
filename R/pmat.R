@@ -28,13 +28,11 @@ function(x, start = -6, end = 9, vnames = NULL) {
 		} else {
 			start.with <- which(x[, 1] == years[i])[start] # start month in current year
 		}
-		for (j in 1:no.months) { # monthly temperature data
-			m[j, (i - 1)] <- x[(start.with + j - 1), 3]
-		}
-		for (j in 1:no.months) { # monthly precipitation sums
-			m[(j + no.months), (i - 1)] <- x[(start.with + j - 1), 4]
+		for (k in 1:no.vars) { # loop through variables
+			for (j in 1:no.months) { # loop through months
+				m[(j + (no.months*(k-1))), (i - 1)] <- x[(start.with + j - 1), 2+k]
+			}
 		}
 	}	
 	as.data.frame(t(m))
 }
-
