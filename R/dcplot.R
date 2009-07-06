@@ -35,7 +35,7 @@ function(x, ci = TRUE, sig = TRUE, labels = NULL, labstyle = 1) {
 			pch.3 <- rep(0, n/3)
 			if (sig) {
 				pch.1[which(x$significant[1:(n/3)] == 1)] <- 19
-				pch.2[which(x$significant[(n/3 + 1):n] == 1)] <- 17
+				pch.2[which(x$significant[(n/3 + 1):(2*(n/3))] == 1)] <- 17
 				pch.3[which(x$significant[(2*(n/3) + 1):n] == 1)] <- 15
 			}
 			pchs <- c(pch.1, pch.2, pch.3)
