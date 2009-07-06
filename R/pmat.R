@@ -21,7 +21,7 @@ function(x, start = -6, end = 9, vnames = NULL) {
 	}
 	m <- matrix(NA, nrow = no.months*2, ncol = n - 1)
 	colnames(m) <- years[-1]
-	rownames(m) <- c(temp.vars, prec.vars)
+	rownames(m) <- as.vector(vnames.mat)
 	for (i in 2:n) {
 		if (start < 0) {
 			start.with <- which(x[, 1] == years[i - 1])[abs(start)] # start month in previous year
