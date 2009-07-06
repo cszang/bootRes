@@ -1,3 +1,3 @@
 Changes in version 0.2
 
-* added option in dendroclim to suppress status bar (useful for e.g. sweave-documents
+* added option in dendroclim to suppress status bar (defaults to TRUE, useful for e.g. sweave-documents)
