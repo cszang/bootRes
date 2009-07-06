@@ -1,4 +1,4 @@
-dendroclim <- function(chrono, clim, method = "response", start = -6, end = 9, timespan = NULL, sb = TRUE) {
+dendroclim <- function(chrono, clim, method = "response", start = -6, end = 9, timespan = NULL, vnames = NULL, sb = TRUE) {
 	month.ids <- c(-1:-12, 1:12)
 	errormsg1 <- "start and end have to define an interval in [-1, -2, ..., -12, 1, 2, ..., 12]."
 	if (!is.element(start, month.ids) || !is.element(end, month.ids) || which(month.ids == start) > which(month.ids == end)) { # check start and end dates
@@ -49,7 +49,7 @@ dendroclim <- function(chrono, clim, method = "response", start = -6, end = 9, t
 	b <- clim[, 1] %in% interval.clim
 	chrono.trunc <- chrono[a, 1] # truncate data 
 	clim.trunc <- clim[b, ]
-	p <- pmat(clim.trunc, start, end) # call pmat to obtain variable matrix
+	p <- pmat(clim.trunc, start, end, vnames) # call pmat to obtain variable matrix
 	METHOD <- match.arg(method, c("response", "correlation"))  # match method argument
 	if (METHOD == "response") {
 		dc <- brf(chrono.trunc, p, sb = sb) # call brf to calculate bootstrapped response function
