@@ -1,5 +1,5 @@
 pmat <-
-function(x, start = -6, end = 9) {
+function(x, start = -6, end = 9, vnames = NULL) {
 	years <- unique(x[, 1])
 	n <- length(years)
 	no.vars <- dim(x)[2] - 2 # number of variables
@@ -7,10 +7,17 @@ function(x, start = -6, end = 9) {
 	month.ids <- c(-1:-12, 1:12)
 	used.months <- months[which(month.ids == start):which(month.ids == end)]
 	no.months <- length(used.months)
-	# create unique names for variables
-	vnames.mat <- matrix(NA, nrow = no.months, nol = no.vars)
+	# check for specified variable names, else default to V1, V2 etc.
+	if (is.null(vnames)) {
+		vnames <- paste(rep("V", no.vars), 1:no.vars, sep = "")
+	} else { # check if number of specified variable names is equal to actual number of variables
+		if (length(unique(vnames) != no.vars)) {
+			vnames <- paste(rep("V", no.vars), 1:no.vars, sep = "")
+		}
+	}
+	vnames.mat <- matrix(NA, nrow = no.months, ncol = no.vars) # create unique names for variables
 	for (i in 1:no.vars) {
-		vnames.mat[, i] <- paste(vnames[i], used.months, sep = "")
+		vnames.mat[, i] <- paste(vnames[i], ".", used.months, sep = "")
 	}
 	m <- matrix(NA, nrow = no.months*2, ncol = n - 1)
 	colnames(m) <- years[-1]
