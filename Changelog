@@ -1,3 +1,4 @@
 Changes in version 0.2
 
+* climatic are not any longer restricted to the combination temperature and precipitation; an arbitrary number of variables can be handled
 * added option in dendroclim to suppress status bar (defaults to TRUE, useful for e.g. sweave-documents)
