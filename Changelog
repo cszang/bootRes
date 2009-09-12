@@ -1,4 +1,9 @@
+Changes in version 0.3
+
+* workhorse function renames to dcc(), kept an alias from dendroclim() for compatibility
+* added more example data
+
 Changes in version 0.2
 
-* climatic are not any longer restricted to the combination temperature and precipitation; an arbitrary number of variables can be handled
+* climatic data are not any longer restricted to the combination temperature and precipitation; an arbitrary number of variables can be handled
 * added option in dendroclim to suppress status bar (defaults to TRUE, useful for e.g. sweave-documents)
