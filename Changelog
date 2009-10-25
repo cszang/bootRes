@@ -1,6 +1,6 @@
 Changes in version 0.3
 
-* workhorse function renames to dcc(), kept an alias from dendroclim() for compatibility
+* workhorse function renamed to dcc(), kept an alias from dendroclim() for compatibility
 * added more example data
 
 Changes in version 0.2
