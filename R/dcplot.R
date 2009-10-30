@@ -1,10 +1,6 @@
 dcplot <-
 function(x, ci = TRUE, sig = TRUE, labels = NULL, col = NULL, density = NULL, annot = TRUE) {
-	op <- par(no.readonly = TRUE)
-	} else {
-		par(xpd = TRUE)
-		labels <- rownames(x)
-	}	
+	op <- par(no.readonly = TRUE) 
 	if (is.null(labels))
 		labels <- rownames(x)
 	n <- dim(x)[1]
@@ -17,8 +13,13 @@ function(x, ci = TRUE, sig = TRUE, labels = NULL, col = NULL, density = NULL, an
 		plot.range <- range(c(x$ci.upper, x$ci.lower))
 	} else {
 		plot.range <- range(x$coef)
+	}     
+	if (annot) { # check whether "nice" annotations should be made
+		# TODO: extract monthnames from labels and pass to some variable
+	} else {
+		# TODO: overwrite o.m. variable with original labels
 	}
-	# TODO: set color/shading according to varnames
+	# TODO: set color/shading according to number of varnames
 	if (is.null(density)) { # check, if density is set, if not use colors, otherwise override colors
 		if (is.null(col)) { # check if custom colors are specified; if not use default colors
 			# TODO: define default colors
@@ -38,13 +39,6 @@ function(x, ci = TRUE, sig = TRUE, labels = NULL, col = NULL, density = NULL, an
 	}
 	if (ci) { # check if confidence intervals should be plotted
 		# TODO: add confidence intervals
-	}
-	
-	plot(1:n, x$coef, ylim = plot.range, xlab = "", ylab = "Coefficients", xaxt = "n", type = "n")
-	lines(c(0.5, (n + 0.5)), c(0, 0), lty = 2, col = "grey")
-	points(1:n, x$coef, pch = pchs)
-	if (ci)
-		segments(1:n, x$ci.lower, 1:n, x$ci.upper)
-		text((1:n)+0.01*n, rep(plot.range[1]*1.2, n), labels, srt = 90, pos = 2, cex = 0.7)
+	} 
 	par(op)
 }
