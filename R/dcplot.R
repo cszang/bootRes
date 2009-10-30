@@ -19,7 +19,27 @@ function(x, ci = TRUE, sig = TRUE, labels = NULL, col = NULL, density = NULL, an
 		plot.range <- range(x$coef)
 	}
 	# TODO: set color/shading according to varnames
-	pb <- barplot(x$coef)
+	if (is.null(density)) { # check, if density is set, if not use colors, otherwise override colors
+		if (is.null(col)) { # check if custom colors are specified; if not use default colors
+			# TODO: define default colors
+		} else {
+			# TODO: check defined colors for consistence and apply
+		}
+		if (sig) {
+			# TODO: set different colors for significant values
+		}
+		pb <- barplot(x$coef, ylim = plot.range, col = col) # draw plot
+	} else {
+		# TODO: check defined densities and apply
+		if (sig) {
+			# TODO: set different densities for significant values
+		}
+		pb <- barplot(x$coef, ylim = plot.range, density = density) # draw plot
+	}
+	if (ci) { # check if confidence intervals should be plotted
+		# TODO: add confidence intervals
+	}
+	
 	plot(1:n, x$coef, ylim = plot.range, xlab = "", ylab = "Coefficients", xaxt = "n", type = "n")
 	lines(c(0.5, (n + 0.5)), c(0, 0), lty = 2, col = "grey")
 	points(1:n, x$coef, pch = pchs)
