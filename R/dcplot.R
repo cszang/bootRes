@@ -1,5 +1,5 @@
 dcplot <-
-function(x, ci = TRUE, sig = TRUE, labels = NULL, labstyle = 1) {
+function(x, ci = TRUE, sig = TRUE, labels = NULL, col = NULL, density = NULL, annot = TRUE) {
 	op <- par(no.readonly = TRUE)
 	if (labstyle == 1) {
 		par(xpd = TRUE, oma = c(3, 0.5, 0.5, 0.5))
