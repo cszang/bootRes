@@ -1,5 +1,4 @@
-pmat <-
-function(x, start = -6, end = 9, vnames = NULL) {
+pmat <- function(x, start = -6, end = 9, vnames = NULL) {
   years <- unique(x[, 1])
   n <- length(years)
   no.vars <- dim(x)[2] - 2 # number of variables
