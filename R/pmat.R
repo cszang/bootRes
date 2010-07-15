@@ -36,4 +36,5 @@ function(x, start = -6, end = 9, vnames = NULL) {
   }
   pmatrix <- as.data.frame(t(m))
   attributes(pmatrix)$npar <- no.vars
+  pmatrix
 }
