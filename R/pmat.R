@@ -33,6 +33,7 @@ function(x, start = -6, end = 9, vnames = NULL) {
         m[(j + (no.months*(k-1))), (i - 1)] <- x[(start.with + j - 1), 2+k]
       }
     }
-  }	
-  as.data.frame(t(m))
+  }
+  pmatrix <- as.data.frame(t(m))
+  attributes(pmatrix)$npar <- no.vars
 }

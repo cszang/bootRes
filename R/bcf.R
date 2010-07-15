@@ -27,5 +27,6 @@ bcf <- function(g, p, sb) {
   rownames(out) <- colnames(p)
   if (sb) # close status bar (if TRUE)
     close(pb)
+  attributes(out)$npar <- attributes(p)$npar
   as.data.frame(out)
 }
