@@ -1,4 +1,4 @@
-bcf <- function(g, p, sb) {
+bcf <- function(g, p, sb, vnames) {
   require(utils)
   n <- length(g)
   m <- dim(p)[2]
@@ -27,6 +27,8 @@ bcf <- function(g, p, sb) {
   rownames(out) <- colnames(p)
   if (sb) # close status bar (if TRUE)
     close(pb)
+  out <- as.data.frame(out)
   attributes(out)$npar <- attributes(p)$npar
-  as.data.frame(out)
+  attributes(out)$vnames <- vnames
+  out
 }

@@ -1,4 +1,4 @@
-brf <- function(g, p, sb) {
+brf <- function(g, p, sb, vnames) {
   n <- length(g)
   param.matrix <- matrix(NA, nrow = dim(p)[2], ncol = 1000)
   if (sb) { # initialize status bar (if TRUE)
@@ -34,7 +34,9 @@ brf <- function(g, p, sb) {
   rownames(out) <- colnames(p)
   if (sb) # close status bar (if TRUE)
     close(pb)
-  attributes(out)$npar <- attributes(p)$npar  
-  as.data.frame(out)
+  out <- as.data.frame(out)
+  attributes(out)$npar <- attributes(p)$npar
+  attributes(out)$vnames <- vnames
+  out
 }
 

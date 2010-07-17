@@ -68,10 +68,14 @@ dcc <- function(chrono, clim, method = "response", start = -6, end =
   p <- pmat(clim.trunc, start, end, vnames) # call pmat to obtain variable matrix
   METHOD <- match.arg(method, c("response", "correlation"))  # match method argument
   if (METHOD == "response") {
-    dc <- brf(chrono.trunc, p, sb = sb) # call brf to calculate bootstrapped response function
+    dc <- brf(chrono.trunc, p, sb = sb, vnames = vnames) # call brf to
+                                        # calculate bootstrapped
+                                        # response function
   }
   if (METHOD == "correlation") {
-    dc <- bcf(chrono.trunc, p, sb = sb) # call bcf to calculate bootstrapped correlation function
+    dc <- bcf(chrono.trunc, p, sb = sb, vnames = vnames) # call bcf to
+                                        # calculate bootstrapped
+                                        # correlation function
   }
   cat("time span considered:", start.year, "-", end.year, "\n")
   dc
