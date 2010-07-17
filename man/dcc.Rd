@@ -1,6 +1,11 @@
-\name{dendroclim}
-\Rdversion{1.1}
+\name{dcc}
+
+%% <LIST>
 \alias{dendroclim}
+%% </LIST>
+
+\Rdversion{1.1}
+\alias{dcc}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Calculation of bootstrapped response and correlation functions.
@@ -9,7 +14,7 @@ Calculation of bootstrapped response and correlation functions.
 This function calculates response and correlation functions from tree-ring chronologies and monthly climatic data. Function parameters are bootstrapped to calculate their significance and confidence intervals.
 }
 \usage{
-dendroclim(chrono, clim, method = "response", start = -6, end = 9, timespan = NULL, vnames = NULL, sb = TRUE)
+dcc(chrono, clim, method = "response", start = -6, end = 9, timespan = NULL, vnames = NULL, sb = TRUE)
 }
 \arguments{
   \item{chrono}{
@@ -66,16 +71,16 @@ data(muc.clim) # climatic data
 data(muc.spruce) # spruce data
 
 # calculate and plot response function
-dc.resp <- dendroclim(muc.spruce, muc.clim)
+dc.resp <- dcc(muc.spruce, muc.clim)
 dcplot(dc.resp)
 
 # calculate and plot correlation function
-dc.corr <- dendroclim(muc.spruce, muc.clim, method = "corr")
+dc.corr <- dcc(muc.spruce, muc.clim, method = "corr")
 dcplot(dc.corr)
 
 # use modelled data for better response ;-)
 data(muc.fake)
-dc.resp.fake <- dendroclim(muc.fake, muc.clim)
+dc.resp.fake <- dcc(muc.fake, muc.clim)
 dcplot(dc.resp.fake)
 }
 
