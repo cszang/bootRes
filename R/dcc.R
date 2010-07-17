@@ -1,10 +1,19 @@
-dcc <- function(chrono, clim, method = "response", start = -6, end = 9, timespan = NULL, vnames = NULL, sb = TRUE) {
+dcc <- function(chrono, clim, method = "response", start = -6, end =
+                9, timespan = NULL, vnames = NULL, sb = TRUE) {
   month.ids <- c(-1:-12, 1:12)
-  errormsg1 <- "start and end have to define an interval in [-1, -2, ..., -12, 1, 2, ..., 12]."
-  if (!is.element(start, month.ids) || !is.element(end, month.ids) || which(month.ids == start) > which(month.ids == end)) { # check start and end dates
+  errormsg1 <-
+    "start and end have to define an interval in [-1, -2, ..., -12, 1, 2, ..., 12]."
+  if (!is.element(start, month.ids) || !is.element(end, month.ids) ||
+                which(month.ids == start) > which(month.ids == end)) {
+                # check start and end dates
     stop(errormsg1)
   }
-  chrono.years <- as.numeric(row.names(chrono)) # get timespan of chrono
+  ## climate data dispatcher gets called...
+  clim <- climdispatch(clim)                    # properly formatted
+                                        # climate data gets returned
+                                        # here
+  chrono.years <- as.numeric(row.names(chrono)) # get timespan of
+                                        # chrono
   clim.years <- sort(unique(clim[, 1])) # get timespan of climate data
   if (chrono.years[1] <= clim.years[1]) {
     overlap <- na.omit(clim.years[match(chrono.years, clim.years)]) # get overlap of timespans
@@ -16,16 +25,23 @@ dcc <- function(chrono, clim, method = "response", start = -6, end = 9, timespan
     end.year <- tail(overlap, 1)
   } else {
     if (start > 0) {
-      if (!is.element(timespan[1], overlap) || !is.element(timespan[2], overlap)) {
-        errormsg3 <- paste("timespan has to be between ", overlap[1], " and ", tail(overlap, 1), " for start dates in current year.", sep = "")
+      if (!is.element(timespan[1], overlap) ||
+          !is.element(timespan[2], overlap)) {
+        errormsg3 <- paste("timespan has to be between ", overlap[1],
+                           " and ", tail(overlap, 1),
+                           " for start dates in current year.",
+                           sep = "")
         stop(errormsg3)
       } else {
         start.year <- timespan[1]
         end.year <- timespan[2]
       }
     } else {
-      if (!is.element(timespan[1], overlap) || !is.element(timespan[2], overlap)) {
-        errormsg4 <- paste("timespan has to be between ", overlap[1] + 1, " and ", tail(overlap, 1), " for start dates in previous year.", sep = "")
+      if (!is.element(timespan[1], overlap) ||
+          !is.element(timespan[2], overlap)) {
+        errormsg4 <- paste("timespan has to be between ", overlap[1] +
+                           1, " and ", tail(overlap, 1),
+                           " for start dates in previous year.", sep = "")
         stop(errormsg4)
       } else {
         start.year <- timespan[1]
