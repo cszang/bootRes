@@ -1,5 +1,5 @@
 dcc <- function(chrono, clim, method = "response", start = -6, end =
-                9, timespan = NULL, vnames = NULL, sb = TRUE) {
+                9, timespan = NULL, vnames = NULL, sb = TRUE, boot = TRUE) {
   month.ids <- c(-1:-12, 1:12)
   errormsg1 <-
     "start and end have to define an interval in [-1, -2, ..., -12, 1, 2, ..., 12]."
@@ -68,14 +68,26 @@ dcc <- function(chrono, clim, method = "response", start = -6, end =
   p <- pmat(clim.trunc, start, end, vnames) # call pmat to obtain variable matrix
   METHOD <- match.arg(method, c("response", "correlation"))  # match method argument
   if (METHOD == "response") {
-    dc <- brf(chrono.trunc, p, sb = sb, vnames = vnames) # call brf to
+    if (boot) {
+      dc <- brf(chrono.trunc, p, sb = sb, vnames = vnames) # call brf to
                                         # calculate bootstrapped
                                         # response function
+    } else {
+      dc <- rf(chrono.trunc, p, vnames = vnames) # call rf for
+                                        # non-bootstrapped response
+                                        # function
+    }
   }
   if (METHOD == "correlation") {
-    dc <- bcf(chrono.trunc, p, sb = sb, vnames = vnames) # call bcf to
+    if (boot) {
+      dc <- bcf(chrono.trunc, p, sb = sb, vnames = vnames) # call bcf to
                                         # calculate bootstrapped
                                         # correlation function
+    } else {
+      dc <- cf(chrono.trunc, p, vnames = vnames) # call cf for
+                                        # non-bootstrapped correlation
+                                        # function
+    }
   }
   cat("time span considered:", start.year, "-", end.year, "\n")
   dc
