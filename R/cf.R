@@ -12,7 +12,7 @@ cf <- function(g, p, vnames) {
   ci.lower <- NA
   ci.upper <- NA
   is.sig <- NA
-  out <- cbind(coef = bcf.coef, significant = is.sig, ci.lower = ci.lower, ci.upper = ci.upper)
+  out <- cbind(coef = cf.coef, significant = is.sig, ci.lower = ci.lower, ci.upper = ci.upper)
   rownames(out) <- colnames(p)
   out <- as.data.frame(out)
   attributes(out)$npar <- attributes(p)$npar
