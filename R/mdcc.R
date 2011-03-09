@@ -1,11 +1,10 @@
 mdcc <- function(chrono, clim, method = "response", start = -6, end =
-                 9, timespan = NULL, vnames = NULL, sb = TRUE, win.size
-                 = 25, win.offset = 1, startlast = TRUE, boot = FALSE) {
+                 9, timespan = NULL, vnames = NULL, sb = TRUE,
+                 win.size = 25, win.offset = 1, startlast = TRUE,
+                 boot = FALSE) {
 	# TODO: status bar should correspond to whole window movement, not to single computations
-	# TODO: all dcc with given parameters
-	# TODO: Loop through series.
-        # TODO: startlast Parameter implementieren: gibt an, ob
-        # Fenster von vorne oder hinten gestartet werden
+        # startlast: gibt an, ob vom Ende (neueste Daten), oder vom
+        # Anfang (älteste Daten) berechnet wird
   
   month.ids <- c(-1:-12, 1:12)
   errormsg1 <-
@@ -77,89 +76,97 @@ mdcc <- function(chrono, clim, method = "response", start = -6, end =
   ## number of windows
   years <- as.numeric(rownames(p))
   n.years <- length(years)
-  win.num <- (length(chrono.trunc) - winsize) %/% win.offset
+  win.num <- (length(chrono.trunc) - win.size) %/% win.offset
   win.years.string <- character(win.num)
   windows <- 1:win.num
   ## result matrix
   result.matrix <- matrix(NA, ncol = win.num, nrow = dim(p)[2])
-  if (startlast) {                      # windows will start from
-                                        # series end (most recent
-                                        # values)
+
+  if (sb) { # initialize status bar (if TRUE)
+    require(utils)
+    mpb <- txtProgressBar(min = 1,  max = win.num, style = 3)
+  } 
+
+  if (startlast) {
     for (k in 1:win.num) {
-      series.subset.index <- (n.years - ((k-1) * win.offset - (winsize -
-                                                           1))):(n.years
-                                                           - ((k-1) *
-                                                           win.offset))
+      series.subset.index <- ((n.years - ((k-1)*win.offset)) -
+                              (win.size - 1)):(n.years - ((k-1)*win.offset))
       p.win <- p[series.subset.index,]
       chrono.win <- chrono.trunc[series.subset.index]
       METHOD <- match.arg(method, c("response", "correlation"))  # match method argument
       if (METHOD == "response") {
         if (boot) {
-          dc.coef <- brf(chrono.win, p.win, sb = FALSE, vnames = vnames)$brf.coef # call brf to
+          dc.coef <- brf(chrono.win, p.win, sb = FALSE, vnames = vnames)$coef # call brf to
                                         # calculate bootstrapped
                                         # response function
         } else {
-          dc.coef <- rf(chrono.win, p.win, vnames = vnames)$rf.coef # call rf for
+          dc.coef <- rf(chrono.win, p.win, vnames = vnames)$coef # call rf for
                                         # non-bootstrapped response
                                         # function
         }
       }
       if (METHOD == "correlation") {
         if (boot) {
-          dc.coef <- bcf(chrono.win, p.win, sb = FALSE, vnames = vnames)$bcf.coef # call bcf to
+          dc.coef <- bcf(chrono.win, p.win, sb = FALSE, vnames = vnames)$coef # call bcf to
                                         # calculate bootstrapped
                                         # correlation function
         } else {
-          dc.coef <- cf(chrono.win, p.win, vnames = vnames)$cf.coef # call cf for
+          dc.coef <- cf(chrono.win, p.win, vnames = vnames)$coef # call cf for
                                         # non-bootstrapped correlation
                                         # function
         }
       }
       result.matrix[,k] <- dc.coef
       win.years.string[k] <- paste(years[series.subset.index][1],
-                                   years[series.subset.index][winsize],
+                                   years[series.subset.index][win.size],
                                    sep = "-")
+      if (sb) # update status bar (if TRUE)
+        setTxtProgressBar(mpb, k)
     }
-    dc <- result.matrix
-    rownames(result.matrix) <- win.years.string
-  } else {                              # start windows from year
-                                        # (older) end of series
+    result.matrix <- result.matrix[,win.num:1]
+    win.years.string <- win.years.string[win.num:1]
+  } else {
     for (k in 1:win.num) {
       series.subset.index <- (1 + ((k-1) * win.offset)):(1 + ((k-1) *
-                                                          win.offset) +
-                                                     (winsize - 1))
+                                                              win.offset) +
+                                                         (win.size - 1))
       p.win <- p[series.subset.index,]
       chrono.win <- chrono.trunc[series.subset.index]
       METHOD <- match.arg(method, c("response", "correlation"))  # match method argument
       if (METHOD == "response") {
         if (boot) {
-          dc.coef <- brf(chrono.win, p.win, sb = FALSE, vnames = vnames)$brf.coef # call brf to
+          dc.coef <- brf(chrono.win, p.win, sb = FALSE, vnames = vnames)$coef # call brf to
                                         # calculate bootstrapped
                                         # response function
         } else {
-          dc.coef <- rf(chrono.win, p.win, vnames = vnames)$rf.coef # call rf for
+          dc.coef <- rf(chrono.win, p.win, vnames = vnames)$coef # call rf for
                                         # non-bootstrapped response
                                         # function
         }
       }
       if (METHOD == "correlation") {
         if (boot) {
-          dc.coef <- bcf(chrono.win, p.win, sb = FALSE, vnames = vnames)$bcf.coef # call bcf to
+          dc.coef <- bcf(chrono.win, p.win, sb = FALSE, vnames = vnames)$coef # call bcf to
                                         # calculate bootstrapped
                                         # correlation function
         } else {
-          dc.coef <- cf(chrono.win, p.win, vnames = vnames)$cf.coef # call cf for
+          dc.coef <- cf(chrono.win, p.win, vnames = vnames)$coef # call cf for
                                         # non-bootstrapped correlation
                                         # function
         }
       }
       result.matrix[,k] <- dc.coef
       win.years.string[k] <- paste(years[series.subset.index][1],
-                                   years[series.subset.index][winsize],
+                                   years[series.subset.index][win.size],
                                    sep = "-")
+      if (sb) # update status bar (if TRUE)
+        setTxtProgressBar(mpb, k)
     }
-    dc <- result.matrix
-    rownames(result.matrix) <- win.years.string
   }
+  dc <- result.matrix
+  colnames(dc) <- win.years.string
+  rownames(dc) <- colnames(p.win)
+  if (sb) # close status bar (if TRUE)
+    close(mpb)
   dc
 }

@@ -30,11 +30,10 @@ brf <- function(g, p, sb, vnames) {
   ci.lower <- apply(param.matrix, 1, function(x) { sort(x)[25] })
   ci.upper <- apply(param.matrix, 1, function(x) { sort(x)[975] }) 
   is.sig <- ifelse(abs(brf.coef) > (ci.upper - ci.lower)/2, TRUE, FALSE)
-  out <- cbind(coef = brf.coef, significant = is.sig, ci.lower = ci.lower, ci.upper = ci.upper)
+  out <- data.frame(coef = brf.coef, significant = is.sig, ci.lower = ci.lower, ci.upper = ci.upper)
   rownames(out) <- colnames(p)
   if (sb) # close status bar (if TRUE)
     close(pb)
-  out <- as.data.frame(out)
   attributes(out)$npar <- attributes(p)$npar
   attributes(out)$vnames <- vnames
   out

@@ -1,8 +1,6 @@
 ## non-bootstrapped version of brf
 rf <- function(g, p, vnames) {
   n <- length(g)
-  param.matrix <- matrix(NA, nrow = dim(p)[2], ncol = 1000)
-  boot.sample <- sample(1:n, n, replace = TRUE)
   g <- (g - mean(g))/sd(g) # standardize
   p <- apply(p, 2, function(x) { (x - mean(x))/sd(x) }) # standardize
   cor.mat <- cor(p) # correlation matrix X'X (q*q)
@@ -20,10 +18,9 @@ rf <- function(g, p, vnames) {
   ci.lower <- NA
   ci.upper <- NA
   is.sig <- NA
-  out <- cbind(coef = rf.coef, significant = is.sig, ci.lower = ci.lower, ci.upper = ci.upper)
+  out <- data.frame(coef = rf.coef, significant = is.sig, ci.lower = ci.lower, ci.upper = ci.upper)
   rownames(out) <- colnames(p)
-  out <- as.data.frame(out)
-  attributes(out)$npar <- attributes(p)$npar
+   attributes(out)$npar <- attributes(p)$npar
   attributes(out)$vnames <- vnames
   out
 }
