@@ -1,5 +1,5 @@
 ## non-bootstrapped correlation function
-cf <- function(g, p, vnames) {
+nbcf <- function(g, p, vnames) {
   n <- length(g)
   m <- dim(p)[2]
   params <- numeric(m)

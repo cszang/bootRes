@@ -73,7 +73,7 @@ dcc <- function(chrono, clim, method = "response", start = -6, end =
                                         # calculate bootstrapped
                                         # response function
     } else {
-      dc <- rf(chrono.trunc, p, vnames = vnames) # call rf for
+      dc <- nbrf(chrono.trunc, p, vnames = vnames) # call rf for
                                         # non-bootstrapped response
                                         # function
     }
@@ -84,7 +84,7 @@ dcc <- function(chrono, clim, method = "response", start = -6, end =
                                         # calculate bootstrapped
                                         # correlation function
     } else {
-      dc <- cf(chrono.trunc, p, vnames = vnames) # call cf for
+      dc <- nbcf(chrono.trunc, p, vnames = vnames) # call cf for
                                         # non-bootstrapped correlation
                                         # function
     }

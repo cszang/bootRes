@@ -1,5 +1,5 @@
 ## non-bootstrapped version of brf
-rf <- function(g, p, vnames) {
+nbrf <- function(g, p, vnames) {
   n <- length(g)
   g <- (g - mean(g))/sd(g) # standardize
   p <- apply(p, 2, function(x) { (x - mean(x))/sd(x) }) # standardize

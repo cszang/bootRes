@@ -139,7 +139,7 @@ mdcc <- function(chrono, clim, method = "response", start = -6, end =
                                         # calculate bootstrapped
                                         # response function
         } else {
-          dc.coef <- rf(chrono.win, p.win, vnames = vnames)$coef # call rf for
+          dc.coef <- nbrf(chrono.win, p.win, vnames = vnames)$coef # call rf for
                                         # non-bootstrapped response
                                         # function
         }
@@ -150,7 +150,7 @@ mdcc <- function(chrono, clim, method = "response", start = -6, end =
                                         # calculate bootstrapped
                                         # correlation function
         } else {
-          dc.coef <- cf(chrono.win, p.win, vnames = vnames)$coef # call cf for
+          dc.coef <- nbcf(chrono.win, p.win, vnames = vnames)$coef # call cf for
                                         # non-bootstrapped correlation
                                         # function
         }
