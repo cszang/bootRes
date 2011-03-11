@@ -1,8 +1,8 @@
 Package: bootRes
 Type: Package
 Title: Bootstrapped Response and Correlation Functions
-Version: 0.3
-Date: 2010-07-17
+Version: 1.0
+Date: 2011-03-11
 Author: Christian Zang
 Maintainer: Christian Zang <christian.zang@gmail.com>
 Depends: base, stats, utils

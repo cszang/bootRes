@@ -1,11 +1,16 @@
-Changes in version 0.3
+* Changes in version 1.0
 
-* workhorse function renamed to dcc(), kept an alias from dendroclim() for
-	compatibility
-* support for climate data formatted according to DENDROCLIM2002 specs
-* added more example data
+** added moving response and correlation functions
+** added plotting support for moving response and correlation functions
+** reworked dcplot function for vertical and horizontal plotting layouts
 
-Changes in version 0.2
+* Changes in version 0.3
 
-* climatic data are not any longer restricted to the combination temperature and precipitation; an arbitrary number of variables can be handled
-* added option in dendroclim to suppress status bar (defaults to TRUE, useful for e.g. Sweave-documents)
+** workhorse function renamed to dcc(), kept an alias from dendroclim() for compatibility
+** support for climate data formatted according to DENDROCLIM2002 specs
+** added more example data
+
+* Changes in version 0.2
+
+** climatic data are not any longer restricted to the combination temperature and precipitation; an arbitrary number of variables can be handled
+** added option in dendroclim to suppress status bar (defaults to TRUE, useful for e.g. Sweave-documents)
