@@ -1,5 +1,5 @@
 dcplot <-
-function(x, ci = TRUE, sig = TRUE, labels = NULL, horizontal = TRUE) {
+function(x, ci = TRUE, sig = TRUE, labels = NULL, vertical = FALSE) {
 
   ## TODO Schöne Monatsnamen erzeugen und als Achsenbeschriftung
   ## darstellen
@@ -77,7 +77,7 @@ function(x, ci = TRUE, sig = TRUE, labels = NULL, horizontal = TRUE) {
     }
     axis(side = 1, at = pb, labels = labels2, line
       = 1)
-    text(pb[2], max(x$ci.upper), nice.vnames[i], xpd = NA)
+    text(pb[2], ifelse(ci, max(x$ci.upper), max(x$coef)), nice.vnames[i], xpd = NA)
     return(NULL)
   }
 
@@ -94,7 +94,7 @@ function(x, ci = TRUE, sig = TRUE, labels = NULL, horizontal = TRUE) {
   n.nas <- length(na.pos)
 
   
-  if (horizontal) {                     # horizontal layout
+  if (!vertical) {                     # horizontal layout
 
     x2 <- NULL
     for (i in 1:n.nas) {
@@ -133,7 +133,7 @@ function(x, ci = TRUE, sig = TRUE, labels = NULL, horizontal = TRUE) {
     axis(side = 1, at = pb[-((na.pos[-1])+1)], labels = labels2, line
       = 1)
     for (i in 1:no.vars) {
-      text(pb[na.pos[i]+2], max(x$ci.upper), nice.vnames[i], xpd = NA)
+      text(pb[na.pos[i]+2], ifelse(ci, max(x$ci.upper), max(x$coef)), nice.vnames[i], xpd = NA)
     }
 
   } else {                              # vertical plot layout
@@ -183,7 +183,7 @@ function(x, ci = TRUE, sig = TRUE, labels = NULL, horizontal = TRUE) {
       }
       axis(side = 1, at = pb[-((na.pos[-1])+1)], labels = labels2[1:(n/no.vars)], line
            = 1)
-      text(pb[1], max(x$ci.upper), nice.vnames[i], xpd = NA)
+      text(pb[1], ifelse(ci, max(x$ci.upper), max(x$coef)), nice.vnames[i], xpd = NA)
     }
   }
 par(op)
