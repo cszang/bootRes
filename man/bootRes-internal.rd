@@ -5,6 +5,8 @@
 \alias{brf}
 \alias{pmat}
 \alias{climdispatch}
+\alias{nbcf}
+\alias{nbrf}
 %% </LIST>
 
 \title{Internal bootRes Functions}

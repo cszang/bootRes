@@ -1,9 +1,14 @@
+* Changes in version 1.1
+
+** added NAMESPACE
+** added more options for confidence intervals (set with ci = ... in functions dcc() and mdcc())
+
 * Changes in version 1.0
 
 ** added moving response and correlation functions
 ** added plotting support for moving response and correlation functions
 ** reworked dcplot function for vertical and horizontal plotting layouts
-
+   
 * Changes in version 0.3
 
 ** workhorse function renamed to dcc(), kept an alias from dendroclim() for compatibility
