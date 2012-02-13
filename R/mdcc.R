@@ -1,7 +1,7 @@
 mdcc <- function(chrono, clim, method = "response", start = -6, end =
                  9, timespan = NULL, vnames = NULL, sb = TRUE,
                  win.size = 25, win.offset = 1, startlast = TRUE,
-                 boot = FALSE) {
+                 boot = FALSE, ci = 0.05) {
 	# TODO: status bar should correspond to whole window movement, not to single computations
         # startlast: gibt an, ob vom Ende (neueste Daten), oder vom
         # Anfang (älteste Daten) berechnet wird
@@ -83,7 +83,6 @@ mdcc <- function(chrono, clim, method = "response", start = -6, end =
   result.matrix <- matrix(NA, ncol = win.num, nrow = dim(p)[2])
 
   if (sb) { # initialize status bar (if TRUE)
-    require(utils)
     mpb <- txtProgressBar(min = 1,  max = win.num, style = 3)
   } 
 
@@ -96,22 +95,24 @@ mdcc <- function(chrono, clim, method = "response", start = -6, end =
       METHOD <- match.arg(method, c("response", "correlation"))  # match method argument
       if (METHOD == "response") {
         if (boot) {
-          dc.coef <- brf(chrono.win, p.win, sb = FALSE, vnames = vnames)$coef # call brf to
+          dc.coef <- brf(chrono.win, p.win, sb = FALSE, vnames =
+                         vnames, ci = ci)$coef # call brf to
                                         # calculate bootstrapped
                                         # response function
         } else {
-          dc.coef <- rf(chrono.win, p.win, vnames = vnames)$coef # call rf for
+          dc.coef <- nbrf(chrono.win, p.win, vnames = vnames)$coef # call rf for
                                         # non-bootstrapped response
                                         # function
         }
       }
       if (METHOD == "correlation") {
         if (boot) {
-          dc.coef <- bcf(chrono.win, p.win, sb = FALSE, vnames = vnames)$coef # call bcf to
+          dc.coef <- bcf(chrono.win, p.win, sb = FALSE, vnames =
+                         vnames, ci = ci)$coef # call bcf to
                                         # calculate bootstrapped
                                         # correlation function
         } else {
-          dc.coef <- cf(chrono.win, p.win, vnames = vnames)$coef # call cf for
+          dc.coef <- nbcf(chrono.win, p.win, vnames = vnames)$coef # call cf for
                                         # non-bootstrapped correlation
                                         # function
         }
@@ -135,7 +136,8 @@ mdcc <- function(chrono, clim, method = "response", start = -6, end =
       METHOD <- match.arg(method, c("response", "correlation"))  # match method argument
       if (METHOD == "response") {
         if (boot) {
-          dc.coef <- brf(chrono.win, p.win, sb = FALSE, vnames = vnames)$coef # call brf to
+          dc.coef <- brf(chrono.win, p.win, sb = FALSE, vnames =
+                         vnames, ci = ci)$coef # call brf to
                                         # calculate bootstrapped
                                         # response function
         } else {
@@ -146,7 +148,8 @@ mdcc <- function(chrono, clim, method = "response", start = -6, end =
       }
       if (METHOD == "correlation") {
         if (boot) {
-          dc.coef <- bcf(chrono.win, p.win, sb = FALSE, vnames = vnames)$coef # call bcf to
+          dc.coef <- bcf(chrono.win, p.win, sb = FALSE, vnames =
+                         vnames, ci = ci)$coef # call bcf to
                                         # calculate bootstrapped
                                         # correlation function
         } else {
