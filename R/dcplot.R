@@ -7,6 +7,11 @@ function(x, ci = TRUE, sig = TRUE, labels = NULL, vertical = FALSE) {
   
   op <- par(no.readonly = TRUE) 
 
+  if(any(is.na(x$sig))) {
+    sig <- FALSE
+    ci <- FALSE
+  }
+  
   n <- dim(x)[1]
   
   if (is.null(labels)) {
@@ -77,7 +82,8 @@ function(x, ci = TRUE, sig = TRUE, labels = NULL, vertical = FALSE) {
     }
     axis(side = 1, at = pb, labels = labels2, line
       = 1)
-    text(pb[2], ifelse(ci, max(x$ci.upper), max(x$coef)), nice.vnames[i], xpd = NA)
+    text(pb[2], ifelse(ci, max(x$ci.upper), max(x$coef))*1.2,
+         nice.vnames[i], xpd = NA, text = 4)
     return(NULL)
   }
 
@@ -97,11 +103,14 @@ function(x, ci = TRUE, sig = TRUE, labels = NULL, vertical = FALSE) {
   if (!vertical) {                     # horizontal layout
 
     x2 <- NULL
+    axis.pos <- NULL
     for (i in 1:n.nas) {
       x2 <- rbind(x2, NA, x[((na.pos[i]+1):(na.pos[i]+repl)),])
+      axis.pos <- c(axis.pos, na.pos[i] + (i-1))
     }
 
     x2 <- x2[-1,]
+    no.axis.pos <- axis.pos[-1]
     
     if (sig) {
       pb <- barplot(x2$coef, ylim = plot.range, border = "#FFFFFF00",
@@ -130,15 +139,16 @@ function(x, ci = TRUE, sig = TRUE, labels = NULL, vertical = FALSE) {
                                            x2$ci.upper[i]))
       }
     }
-    axis(side = 1, at = pb[-((na.pos[-1])+1)], labels = labels2, line
+    axis(side = 1, at = pb[-no.axis.pos], labels = labels2, line
       = 1)
     for (i in 1:no.vars) {
-      text(pb[na.pos[i]+2], ifelse(ci, max(x$ci.upper), max(x$coef)), nice.vnames[i], xpd = NA)
+      text(pb[axis.pos[i]+1], ifelse(ci, max(x$ci.upper), max(x$coef))*1.2,
+           nice.vnames[i], xpd = NA, pos = 4)
     }
 
   } else {                              # vertical plot layout
 
-    par(mfrow = c(no.vars, 1), mai = c(1, 0.8, 0.3, 0.3))
+    par(mfrow = c(no.vars, 1), oma = c(0.5, 1, 0, 0), mai = c(0.6, 0.5, 0.3, 0.1))
 
     ## loop through variables and create one barplot for each
 
@@ -183,7 +193,8 @@ function(x, ci = TRUE, sig = TRUE, labels = NULL, vertical = FALSE) {
       }
       axis(side = 1, at = pb[-((na.pos[-1])+1)], labels = labels2[1:(n/no.vars)], line
            = 1)
-      text(pb[1], ifelse(ci, max(x$ci.upper), max(x$coef)), nice.vnames[i], xpd = NA)
+      text(pb[1], ifelse(ci, max(x$ci.upper), max(x$coef))*1.2,
+           nice.vnames[i], xpd = NA, pos = 4)
     }
   }
 par(op)

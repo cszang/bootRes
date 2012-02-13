@@ -5,31 +5,32 @@
 Plotting Function for Response and Correlation Functions
 }
 \description{
-A simple plotting function for response and correlation functions derived from \code{\link{dendroclim}}.
+A simple plotting function for response and correlation functions derived from \code{\link{dcc}}.
 }
 \usage{
-dcplot(x, ci = TRUE, sig = TRUE, labels = NULL, labstyle = 1)
+dcplot(x, ci = TRUE, sig = TRUE, labels = NULL, vertical = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-\code{data.frame} with coefficients derived from \code{\link{dendroclim}}.
+\code{data.frame} with coefficients derived from \code{\link{dcc}}.
 }
   \item{ci}{
 logical: should confidence intervals be plotted?
 }
   \item{sig}{
-logical: should significant coefficients be indicated by filled symbols?
+logical: should significant coefficients be indicated by bars in darker grey?
 }
   \item{labels}{
 character vector with labels to use for coefficients. Defaults to \code{rownames(x)}. 
 }
-  \item{labstyle}{
-integer indicating the style to be used for labels. Options are 1 for verbose/verbatim labels or 2 for abbreviated month names. If custom labels are specified, selection reverts to 1.
+  \item{vertical}{
+logical: should plots be laid out vertically (defaults to FALSE).
 }
 }
 \details{
-If less than 4 parameters are used in the response or correlation function, each parameter is represented with a distinct symbol.
+An arbitrary number of parameters can be displayed either horizontally
+or vertically in subplots.
 }
 \value{
 None. Invoked for side effect (plot).
@@ -39,15 +40,15 @@ Christian Zang
 }
 
 \seealso{
-\code{\link{dendroclim}}
+\code{\link{dcc}}
 }
 \examples{
 data(muc.clim)
 data(muc.spruce)
 
 # calculate and plot bootstrapped correlation function
-dc <- dendroclim(muc.spruce, muc.clim, method = "corr")
-dcplot(dc, labstyle = 2)
+dc <- dcc(muc.spruce, muc.clim, method = "corr")
+dcplot(dc)
 }
 
 \keyword{ hplot }
