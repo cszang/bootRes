@@ -1,0 +1,4 @@
+importFrom(utils, txtProgressBar)
+
+export( bcf, brf, climdispatch, dcc, dcplot, dendroclim, mdcc,
+mdcplot, nbcf, nbrf, pmat)
