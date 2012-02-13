@@ -1,10 +1,8 @@
-bcf <- function(g, p, sb, vnames) {
-  require(utils)
+bcf <- function(g, p, sb, vnames, ci = 0.05) {
   n <- length(g)
   m <- dim(p)[2]
   param.matrix <- matrix(NA, nrow = m, ncol = 1000)
   if (sb) { # initialize status bar (if TRUE)
-    require(utils)
     pb <- txtProgressBar(min = 1,  max = 1000, style = 3)
   }
   for (i in 1:1000) {
@@ -20,8 +18,22 @@ bcf <- function(g, p, sb, vnames) {
       setTxtProgressBar(pb, i)
   }
   bcf.coef <- apply(param.matrix, 1, median)
-  ci.lower <- apply(param.matrix, 1, function(x) { sort(x)[25] })
-  ci.upper <- apply(param.matrix, 1, function(x) { sort(x)[975] }) 
+  if (ci == 0.05) {
+    ci.lower <- apply(param.matrix, 1, function(x) { sort(x)[25] })
+    ci.upper <- apply(param.matrix, 1, function(x) { sort(x)[975] })
+  } else {
+    if (ci == 0.01) {
+      ci.lower <- apply(param.matrix, 1, function(x) { sort(x)[5] })
+      ci.upper <- apply(param.matrix, 1, function(x) { sort(x)[995] })
+    } else {
+      if (ci == 0.1) {
+        ci.lower <- apply(param.matrix, 1, function(x) { sort(x)[50] })
+        ci.upper <- apply(param.matrix, 1, function(x) { sort(x)[950] })
+      } else {
+        stop("`ci` must be either 0.1, 0.05, or 0.01.")
+      }
+    }
+  }
   is.sig <- ifelse(abs(bcf.coef) > (ci.upper - ci.lower)/2, TRUE, FALSE)
   out <- data.frame(coef = bcf.coef, significant = is.sig, ci.lower = ci.lower, ci.upper = ci.upper)
   rownames(out) <- colnames(p)

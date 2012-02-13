@@ -1,5 +1,6 @@
 dcc <- function(chrono, clim, method = "response", start = -6, end =
-                9, timespan = NULL, vnames = NULL, sb = TRUE, boot = TRUE) {
+                9, timespan = NULL, vnames = NULL, sb = TRUE, boot =
+                TRUE, ci = 0.05) {
   month.ids <- c(-1:-12, 1:12)
   errormsg1 <-
     "start and end have to define an interval in [-1, -2, ..., -12, 1, 2, ..., 12]."
@@ -80,7 +81,7 @@ dcc <- function(chrono, clim, method = "response", start = -6, end =
   }
   if (METHOD == "correlation") {
     if (boot) {
-      dc <- bcf(chrono.trunc, p, sb = sb, vnames = vnames) # call bcf to
+      dc <- bcf(chrono.trunc, p, sb = sb, vnames = vnames, ci = ci) # call bcf to
                                         # calculate bootstrapped
                                         # correlation function
     } else {
