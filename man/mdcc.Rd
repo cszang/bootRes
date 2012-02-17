@@ -117,9 +117,7 @@ faster.
 }
 \value{
 A \code{data.frame} with a response/correlation coefficient for each
-parameter, its significance (coded as 0/1) and its 95\% confidence
-intervall. If \code{boot} is set to FALSE, no significance and confidence
-intevals are computed, the values are set to NA.
+parameter and time window used for the moving functions.
 }
 \references{
 Biondi, F. & Waikul, K. (2004) DENDROCLIM2002: A C++ program for statistical calibration of climate signals in tree-ring chronologies. \emph{Computers & Geosciences} 30:303-311
