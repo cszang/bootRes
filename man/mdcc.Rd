@@ -18,7 +18,7 @@ may be bootstrapped to calculate their significance and confidence
 intervals.
 }
 \usage{
-mdcc(chrono, clim, method = "response", start = -6, end = 9, timespan =
+mdcc(chrono, clim, method = "response", start = 4, end = 9, timespan =
 NULL, vnames = NULL, sb = TRUE, win.size = 25, win.offset =
 1, startlast = TRUE, boot = FALSE, ci = 0.05)
 }
