@@ -15,7 +15,7 @@
   depth with respective years as \code{rownames}.}
 \references{
   Zang, C., Rothe, A., Weis, W., Pretzsch, H., 2011. Zur Baumarteneignung bei Klimawandel:
-Ableitung der Trockenstress-Anf¨alligkeit wichtiger Waldbaumarten aus
+Ableitung der Trockenstress-Anf\"{a}lligkeit wichtiger Waldbaumarten aus
 Jahrringbreiten. Allgemeine Forst- und Jagdzeitung 182, 98–112.
 }
 \keyword{datasets}
