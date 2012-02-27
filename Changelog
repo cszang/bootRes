@@ -1,3 +1,8 @@
+* Changes in version 1.2
+
+** bootRes now checks for the number of predictor variables and issues an error if it higher than the size of the moving window (mdc) or the overlapping time span of chronos and climate data (dcc)
+** revised example data: chronos now with fixed length spline detrending
+** bugfixes in the docs
 * Changes in version 1.1
 
 ** added NAMESPACE
