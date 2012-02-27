@@ -1,4 +1,4 @@
-mdcc <- function(chrono, clim, method = "response", start = -6, end =
+mdcc <- function(chrono, clim, method = "response", start = 4, end =
                  9, timespan = NULL, vnames = NULL, sb = TRUE,
                  win.size = 25, win.offset = 1, startlast = TRUE,
                  boot = FALSE, ci = 0.05) {
@@ -20,7 +20,7 @@ mdcc <- function(chrono, clim, method = "response", start = -6, end =
   ## raise error, when window size is smaller than number of params
   if (no.params > win.size) {
     win.size.msg <-
-      paste("Window size is smaller than number of parameters! Consider adapting win.size to a minimum of",
+      paste("Window size is smaller than number of parameters! Consider adapting win.size to a minimum of ",
             no.params, ".", sep = "")
     stop(win.size.msg)
   }

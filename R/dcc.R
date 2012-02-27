@@ -63,11 +63,11 @@ dcc <- function(chrono, clim, method = "response", start = -6, end =
     interval.chrono <- (start.year + 1 + offset):end.year
   }
   no.params <- (dim(clim)[2] -2)*length(start:end)
-  overlap.size <- length(start.year:end:year)
+  overlap.size <- length(start.year:end.year)
   ## raise error, when window size is smaller than number of params
   if (no.params > overlap.size) {
     win.size.msg <-
-      paste("Overlapping time span of chrono and climate records is smaller than number of parameters! Consider adapting the number of parameters to a maximum of",
+      paste("Overlapping time span of chrono and climate records is smaller than number of parameters! Consider adapting the number of parameters to a maximum of ",
             overlap.size, ".", sep = "")
     stop(win.size.msg)
   }
