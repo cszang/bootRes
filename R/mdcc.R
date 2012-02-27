@@ -61,6 +61,12 @@ mdcc <- function(chrono, clim, method = "response", start = 4, end =
       }
     }
   }
+  if (length(start.year:end.year) <= win.size) {
+    errormsg5 <-
+      paste("timespan is shorter than win.size. Consider adapting timespan to at least ",
+            win.size, ".", sep = "")
+    stop(errormsg5)
+  }
   if (start < 0 && is.na(match((start.year - 1), clim.years))) { # check if a previous year is available in climatic data; otherwise set start.year + 1
     offset <- 1
   } else {
@@ -83,6 +89,13 @@ mdcc <- function(chrono, clim, method = "response", start = 4, end =
   years <- as.numeric(rownames(p))
   n.years <- length(years)
   win.num <- (length(chrono.trunc) - win.size) %/% win.offset
+  if (win.num < 2) {
+    errmsg6 <-
+      paste("Less than 2 windows. Consider a timespan greater than ",
+            n.years, " or a win.size smaller than ", win.size, ".",
+            sep = "")
+    stop(errmsg6)
+  }
   win.years.string <- character(win.num)
   windows <- 1:win.num
   ## result matrix
