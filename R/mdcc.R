@@ -18,6 +18,15 @@ mdcc <- function(chrono, clim, method = "response", start = -6, end =
   clim <- climdispatch(clim)                    # properly formatted
                                         # climate data gets returned
                                         # here
+
+  no.params <- (dim(clim[2]) -2)*length(start:end)
+  ## raise error, when window size is smaller than number of params
+  if (no.params > win.size) {
+    win.size.msg <-
+      paste("Window size is smaller than number of parameters! Consider adapting win.size to a minimum of",
+            no.params, ".", sep = "")
+    stop(win.size.msg)
+  }
   chrono.years <- as.numeric(row.names(chrono)) # get timespan of
                                         # chrono
   clim.years <- sort(unique(clim[, 1])) # get timespan of climate data
