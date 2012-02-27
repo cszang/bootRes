@@ -2,10 +2,7 @@ mdcc <- function(chrono, clim, method = "response", start = -6, end =
                  9, timespan = NULL, vnames = NULL, sb = TRUE,
                  win.size = 25, win.offset = 1, startlast = TRUE,
                  boot = FALSE, ci = 0.05) {
-	# TODO: status bar should correspond to whole window movement, not to single computations
-        # startlast: gibt an, ob vom Ende (neueste Daten), oder vom
-        # Anfang (älteste Daten) berechnet wird
-  
+
   month.ids <- c(-1:-12, 1:12)
   errormsg1 <-
     "start and end have to define an interval in [-1, -2, ..., -12, 1, 2, ..., 12]."
@@ -19,7 +16,7 @@ mdcc <- function(chrono, clim, method = "response", start = -6, end =
                                         # climate data gets returned
                                         # here
 
-  no.params <- (dim(clim[2]) -2)*length(start:end)
+  no.params <- (dim(clim)[2] -2)*length(start:end)
   ## raise error, when window size is smaller than number of params
   if (no.params > win.size) {
     win.size.msg <-
