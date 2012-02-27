@@ -6,9 +6,9 @@
   This dataset gives the tree-ring indices for \emph{Picea abies}
   at Forstenrieder Park, Munich, Bavaria, Germany. The chronology represents
   20 cores from 10 trees. The series were read in using
-  \code{\link{read.rwl}} from package \code{dplR}, detrended using a 60a
-  spline with 50\% frequency cutoff (function \code{\link{detrend}}),
-  and averaged to a chronology using a robust mean \code{\link{chron}}.
+  \code{\link[dplR]{read.rwl}} from package \code{dplR}, detrended using a 60a
+  spline with 50\% frequency cutoff (function \code{\link[dplR]{detrend}}),
+  and averaged to a chronology using a robust mean \code{\link[dplR]{chron}}.
 }
 \usage{muc.spruce}
 \format{A \code{data.frame} containing tree-ring indices and replication
