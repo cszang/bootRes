@@ -16,7 +16,11 @@ mdcc <- function(chrono, clim, method = "response", start = 4, end =
                                         # climate data gets returned
                                         # here
 
-  no.params <- (dim(clim)[2] -2)*length(start:end)
+  if (start*end > 0) {
+    no.params <- (dim(clim)[2] -2)*length(start:end)
+  } else {
+    no.params <- (dim(clim)[2] -2)*length(start:end)-1 # 0 is not counted
+  }
   ## raise error, when window size is smaller than number of params
   if (no.params > win.size) {
     win.size.msg <-

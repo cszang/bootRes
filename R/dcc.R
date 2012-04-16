@@ -62,7 +62,11 @@ dcc <- function(chrono, clim, method = "response", start = -6, end =
     interval.clim <-(start.year + offset):end.year
     interval.chrono <- (start.year + 1 + offset):end.year
   }
-  no.params <- (dim(clim)[2] -2)*length(start:end)
+  if (start*end > 0) {
+    no.params <- (dim(clim)[2] -2)*length(start:end)
+  } else {
+    no.params <- (dim(clim)[2] -2)*length(start:end)-1 # 0 is not counted
+  }
   overlap.size <- length(start.year:end.year)
   ## raise error, when window size is smaller than number of params
   if (no.params > overlap.size) {

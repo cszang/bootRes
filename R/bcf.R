@@ -34,7 +34,20 @@ bcf <- function(g, p, sb, vnames, ci = 0.05) {
       }
     }
   }
-  is.sig <- ifelse(abs(bcf.coef) > (ci.upper - ci.lower)/2, TRUE, FALSE)
+  
+  ## Significance test
+  is.sig <- logical(m)
+  for (i in 1:m) {
+    if (sign(ci.upper[i]) != sign(ci.lower[i])) {
+      is.sig[i] <- FALSE
+    } else {
+      if (abs(bcf.coef[i]) > abs((abs(ci.upper) - abs(ci.lower))/2)) {
+        is.sig[i] <- TRUE
+      } else {
+        is.sig[i] <- FALSE
+    }
+  }
+
   out <- data.frame(coef = bcf.coef, significant = is.sig, ci.lower = ci.lower, ci.upper = ci.upper)
   rownames(out) <- colnames(p)
   if (sb) # close status bar (if TRUE)
