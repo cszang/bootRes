@@ -1,3 +1,7 @@
+* Changes in version 1.2.1
+
+** FIXED a parameter can not be judged significant, if the CI contains 0 (thanks to Christof Bigler for reporting the bug).
+
 * Changes in version 1.2
 
 ** bootRes now checks for the number of predictor variables and issues an error if it higher than the size of the moving window (mdc) or the overlapping time span of chronos and climate data (dcc)
