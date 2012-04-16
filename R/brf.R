@@ -53,6 +53,7 @@ brf <- function(g, p, sb, vnames, ci = 0.05) {
         is.sig[i] <- TRUE
       } else {
         is.sig[i] <- FALSE
+      }
     }
   }
     
