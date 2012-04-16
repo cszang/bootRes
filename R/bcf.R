@@ -41,7 +41,7 @@ bcf <- function(g, p, sb, vnames, ci = 0.05) {
     if (sign(ci.upper[i]) != sign(ci.lower[i])) {
       is.sig[i] <- FALSE
     } else {
-      if (abs(bcf.coef[i]) > abs((abs(ci.upper) - abs(ci.lower))/2)) {
+      if (abs(bcf.coef[i]) > abs((abs(ci.upper[i]) - abs(ci.lower[i]))/2)) {
         is.sig[i] <- TRUE
       } else {
         is.sig[i] <- FALSE
