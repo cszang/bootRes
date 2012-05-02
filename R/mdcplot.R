@@ -1,5 +1,12 @@
 mdcplot <- function(x, rescale = TRUE, ...) {
 
+  ## check if x is a single data.frame as returned by the old version
+  ## of mdcc, or a list of data.frames as returned by the newer
+  ## version (> 1.2.2); if the first is true, only take the coefs
+  if (!is.data.frame(x)) {
+    x <- x$coef
+  }
+
   blues <- colorRamp(c("#FFFFFF", "#395cd4"))
   reds <- colorRamp(c("#FFFFFF", "#dd291c"))
 

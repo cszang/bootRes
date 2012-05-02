@@ -27,6 +27,13 @@ Rescaling of coefficients results in more contrast for color
 palette. For comparison of absolute values (between different plots),
 this should be set to FALSE. Rescaling is done seperately for positive
 and negative values.
+
+Previous to bootRes version 1.2.2, \code{\link{mdcc}} would return a
+single \code{data.frame} of coefficients, regardless if bootstrapping
+was enabled or not. In more recent versions, a \code{list} of
+\code{data.frames} is returned, containing members for coefficients and
+confidence intervals. The type of \code{x} is checked internally, so
+there is no change in the interface of \code{mdcplot}.
 }
 \value{
 None. Invoked for side effect (plot).

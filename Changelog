@@ -1,3 +1,8 @@
+
+* Changes in version 1.2.2
+
+** CHANGED the return value of mdcc to a list of data.frames containing the coefficients and the confidence intervals; previously, only the coefficients were returned as a single data.frame. mdcplot and the documentations have been adjusted.
+	 
 * Changes in version 1.2.1
 
 ** FIXED a parameter can not be judged significant, if the CI contains 0 (thanks to Christof Bigler for reporting the bug).

@@ -116,8 +116,9 @@ faster.
 
 }
 \value{
-A \code{data.frame} with a response/correlation coefficient for each
-parameter and time window used for the moving functions.
+  A \code{list} containing \code{data.frame}s for coefficients and
+  confidence intervals for each parameter and time window used for the
+  moving functions.
 }
 \references{
 Biondi, F. & Waikul, K. (2004) DENDROCLIM2002: A C++ program for statistical calibration of climate signals in tree-ring chronologies. \emph{Computers & Geosciences} 30:303-311
