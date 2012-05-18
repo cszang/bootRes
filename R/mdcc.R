@@ -105,7 +105,8 @@ mdcc <- function(chrono, clim, method = "response", start = 4, end =
 
   ## result matrices
   result.matrix.coef <- result.matrix.ci.upper <-
-    result.matrix.ci.lower <- matrix(NA, ncol = win.num, nrow = dim(p)[2])
+    result.matrix.ci.lower <- result.matrix.significant <-
+      matrix(NA, ncol = win.num, nrow = dim(p)[2])
 
   if (sb) { # initialize status bar (if TRUE)
     mpb <- txtProgressBar(min = 1,  max = win.num, style = 3)
@@ -128,6 +129,7 @@ mdcc <- function(chrono, clim, method = "response", start = 4, end =
           dc.coef <- dc.res$coef
           dc.ci.upper <- dc.res$ci.upper
           dc.ci.lower <- dc.res$ci.lower
+          dc.sig <- dc.res$significant
         } else {
           dc.res <- nbrf(chrono.win, p.win, vnames = vnames) # call rf for
                                         # non-bootstrapped response
@@ -135,6 +137,7 @@ mdcc <- function(chrono, clim, method = "response", start = 4, end =
           dc.coef <- dc.res$coef
           dc.ci.upper <- NA
           dc.ci.lower <- NA
+          dc.sig <- NA
         }
       }
       if (METHOD == "correlation") {
@@ -146,6 +149,7 @@ mdcc <- function(chrono, clim, method = "response", start = 4, end =
           dc.coef <- dc.res$coef
           dc.ci.upper <- dc.res$ci.upper
           dc.ci.lower <- dc.res$ci.lower
+          dc.sig <- dc.res$significant
         } else {
           dc.res <- nbcf(chrono.win, p.win, vnames = vnames) # call cf for
                                         # non-bootstrapped correlation
@@ -153,11 +157,13 @@ mdcc <- function(chrono, clim, method = "response", start = 4, end =
           dc.coef <- dc.res$coef
           dc.ci.upper <- NA
           dc.ci.lower <- NA
+          dc.sig <- NA
         }
       }
       result.matrix.coef[,k] <- dc.coef
       result.matrix.ci.upper[,k] <- dc.ci.upper
       result.matrix.ci.lower[,k] <- dc.ci.lower
+      result.matrix.significant[,k] <- dc.sig
       win.years.string[k] <- paste(years[series.subset.index][1],
                                    years[series.subset.index][win.size],
                                    sep = "-")
@@ -167,6 +173,7 @@ mdcc <- function(chrono, clim, method = "response", start = 4, end =
     result.matrix.coef <- result.matrix.coef[,win.num:1]
     result.matrix.ci.upper <- result.matrix.ci.upper[,win.num:1]
     result.matrix.ci.lower <- result.matrix.ci.lower[,win.num:1]
+    result.matrix.significant <- result.matrix.significant[,win.num:1]
     win.years.string <- win.years.string[win.num:1]
   } else {
     for (k in 1:win.num) {
@@ -184,6 +191,7 @@ mdcc <- function(chrono, clim, method = "response", start = 4, end =
           dc.coef <- dc.res$coef
           dc.ci.upper <- dc.res$ci.upper
           dc.ci.lower <- dc.res$ci.lower
+          dc.sig <- dc.res$significant
         } else {
           dc.res <- nbrf(chrono.win, p.win, vnames = vnames) # call rf for
                                         # non-bootstrapped response
@@ -191,6 +199,7 @@ mdcc <- function(chrono, clim, method = "response", start = 4, end =
           dc.coef <- dc.res$coef
           dc.ci.upper <- NA
           dc.ci.lower <- NA
+          dc.sig <- NA
         }
       }
       if (METHOD == "correlation") {
@@ -202,6 +211,7 @@ mdcc <- function(chrono, clim, method = "response", start = 4, end =
           dc.coef <- dc.res$coef
           dc.ci.upper <- dc.res$ci.upper
           dc.ci.lower <- dc.res$ci.lower
+          dc.sig <- dc.res$significant
         } else {
           dc.res <- nbcf(chrono.win, p.win, vnames = vnames) # call cf for
                                         # non-bootstrapped correlation
@@ -209,11 +219,13 @@ mdcc <- function(chrono, clim, method = "response", start = 4, end =
           dc.coef <- dc.res$coef
           dc.ci.upper <- NA
           dc.ci.lower <- NA
+          dc.sig <- NA
         }
       }
       result.matrix.coef <- result.matrix.coef[,win.num:1]
       result.matrix.ci.upper <- result.matrix.ci.upper[,win.num:1]
       result.matrix.ci.lower <- result.matrix.ci.lower[,win.num:1]
+      result.matrix.significant <- result.matrix.significant[,win.num:1]
       win.years.string[k] <- paste(years[series.subset.index][1],
                                    years[series.subset.index][win.size],
                                    sep = "-")
@@ -231,6 +243,9 @@ mdcc <- function(chrono, clim, method = "response", start = 4, end =
   dc$ci.lower <- data.frame(result.matrix.ci.lower)
   colnames(dc$ci.lower) <- win.years.string
   rownames(dc$ci.lower) <- colnames(p.win)
+  dc$significant <- data.frame(result.matrix.significant)
+  colnames(dc$significant) <- win.years.string
+  rownames(dc$significant) <- colnames(p.win)
   if (sb) # close status bar (if TRUE)
     close(mpb)
   dc
