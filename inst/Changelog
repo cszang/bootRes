@@ -4,6 +4,8 @@
 * updated package description
 * Changelog is now in /inst
 * Changelog converted to markdown
+* features are frozen for bootRes 1.X, new features are added to
+  bootres2, which will be a complete refactoring
 
 # Changes in version 1.2.2
 
