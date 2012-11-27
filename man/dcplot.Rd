@@ -43,12 +43,14 @@ Christian Zang
 \code{\link{dcc}}
 }
 \examples{
+\dontrun{
 data(muc.clim)
 data(muc.spruce)
 
 # calculate and plot bootstrapped correlation function
 dc <- dcc(muc.spruce, muc.clim, method = "corr")
 dcplot(dc)
+}
 }
 
 \keyword{ hplot }

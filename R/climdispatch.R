@@ -1,7 +1,7 @@
 # takes the raw climate data as argument and checks for formatting:
-## a) 4 column style as originally supported
-## b) dendroclim style (12 months in one row)
-## c) a list of b
+# a) 4 column style as originally supported
+# b) dendroclim style (12 months in one row)
+# c) a list of b
 
 climdispatch <- function(x) {
   ## is it a list?

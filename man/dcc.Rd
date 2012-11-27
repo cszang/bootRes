@@ -112,6 +112,7 @@ Christian Zang
 \code{\link{dcplot}}
 }
 \examples{
+\dontrun{
 data(muc.clim) # climatic data
 data(muc.spruce) # spruce data
 
@@ -135,7 +136,7 @@ data(rt.prec)
 dc.resp <- dcc(rt.spruce, list(rt.temp, rt.prec), vnames =
 c("Temperature", "Precipitation"))
 dcplot(dc.resp)
-
+}
 }
 
 \keyword{ models }
