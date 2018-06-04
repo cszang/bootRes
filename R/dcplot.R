@@ -1,9 +1,9 @@
 dcplot <-
 function(x, ci = TRUE, sig = TRUE, labels = NULL, vertical = FALSE) {
 
-  ## TODO Schöne Monatsnamen erzeugen und als Achsenbeschriftung
+  ## TODO Schoene Monatsnamen erzeugen und als Achsenbeschriftung
   ## darstellen
-  ## TODO Schöne Unterscheidungen für Variablen (horizontale Darstellung)
+  ## TODO Schoene Unterscheidungen fuer Variablen (horizontale Darstellung)
   
   op <- par(no.readonly = TRUE) 
 

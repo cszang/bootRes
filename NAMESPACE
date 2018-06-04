@@ -1,4 +1,8 @@
-importFrom(utils, txtProgressBar)
+import(utils)
+import(stats)
+import(grDevices)
+importFrom("graphics", "axis", "barplot", "lines", "par", "plot",
+           "polygon", "text")
 
-export( bcf, brf, climdispatch, dcc, dcplot, dendroclim, mdcc,
+export(bcf, brf, climdispatch, dcc, dcplot, dendroclim, mdcc,
 mdcplot, nbcf, nbrf, pmat)

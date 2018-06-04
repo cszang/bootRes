@@ -1,12 +1,13 @@
 Package: bootRes
 Type: Package
 Title: Bootstrapped Response and Correlation Functions
-Version: 1.2.3
-Date: 2012-05-02
+Version: 1.2.4
+Date: 2018-05-25
 Author: Christian Zang
 Maintainer: Christian Zang <christian.zang@wzw.tum.de>
-Depends: base, stats, utils
+Imports: stats, utils, grDevices
+Depends: base
 Suggests: dplR
-Description: Calculation of Bootstrapped Response and Correlation Functions for Use in Dendroclimatology
+Description: Bootstrapped correlation and response functions are widely used in dendrochronology to calibrate tree-ring proxy data against multiple instrumental time series of climatic variables. With this package, we provide functionality similar to DENDROCLIM2002 (Biondi and Waikul (2004) <10.1016/j.cageo.2003.11.004>). A full description with examples is given in Zang and Biondi (2013) <10.1016/j.dendro.2012.08.001>.
 License: GPL-3
 LazyLoad: yes

@@ -112,7 +112,7 @@ Christian Zang
 \code{\link{dcplot}}
 }
 \examples{
-\dontrun{
+\donttest{
 data(muc.clim) # climatic data
 data(muc.spruce) # spruce data
 

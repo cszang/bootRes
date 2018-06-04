@@ -121,11 +121,18 @@ faster.
   moving functions.
 }
 \references{
-Biondi, F. & Waikul, K. (2004) DENDROCLIM2002: A C++ program for statistical calibration of climate signals in tree-ring chronologies. \emph{Computers & Geosciences} 30:303-311
 
-Dixon, P.M. (2001) Bootstrap resampling. In: El-Shaarawi, A.H., Piegorsch, W.W. (Eds.), \emph{The Encyclopedia of Environmetrics}. Wiley, New York.
+  Biondi, F. & Waikul, K. (2004) DENDROCLIM2002: A C++ program for
+  statistical calibration of climate signals in tree-ring
+  chronologies. \emph{Computers & Geosciences} 30:303-311
 
-Guiot, J. (1991) The boostrapped response function. \emph{Tree-Ring Bulletin} 51:39-41
+  Dixon, P.M. (2001) Bootstrap resampling. In: El-Shaarawi, A.H.,
+  Piegorsch, W.W. (Eds.), \emph{The Encyclopedia of
+  Environmetrics}. Wiley, New York.
+
+  Guiot, J. (1991) The boostrapped response function. \emph{Tree-Ring
+    Bulletin} 51:39-41
+  
 }
 \author{
 Christian Zang
@@ -143,13 +150,16 @@ data(muc.spruce) # spruce data
 dc.mov1 <- mdcc(muc.spruce, muc.clim)
 mdcplot(dc.mov1)
 
-# calculate and plot moving correlation function with different window parameters
+# calculate and plot moving correlation function with different window
+# parameters
 
 data(rt.spruce)
 data(rt.temp)
 data(rt.prec)
 
-dc.mov2 <- mdcc(rt.spruce, list(rt.temp, rt.prec), vnames = c("temp", "prec"), method = "corr", win.size = 20,
+dc.mov2 <- mdcc(rt.spruce, list(rt.temp, rt.prec),
+                vnames = c("temp", "prec"),
+                method = "corr", win.size = 20,
 win.offset = 5)
 mdcplot(dc.mov2)
 }

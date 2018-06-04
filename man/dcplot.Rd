@@ -43,7 +43,7 @@ Christian Zang
 \code{\link{dcc}}
 }
 \examples{
-\dontrun{
+\donttest{
 data(muc.clim)
 data(muc.spruce)
 
